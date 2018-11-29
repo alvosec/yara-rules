@@ -7,7 +7,7 @@ rule scanconfig
 	filetype = "PHP files"
 
         strings:
-                $a = "Lumajangcrew And All Forum Hacker Indonesia" fullword ascii
+		$a = "Lumajangcrew And All Forum Hacker Indonesia" fullword ascii
 		$b = "eval(base64_decode($scanconfig))" fullword ascii
 
         condition:
