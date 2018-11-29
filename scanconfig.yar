@@ -1,10 +1,10 @@
 rule scanconfig
 {
         meta:
-        author = "Alvosec Security Team <info@alvosec.com>"
-        description = "Scanconfig"
-        date = "2018-28-11"
-	filetype = "PHP files"
+		author = "Alvosec Security Team <info@alvosec.com>"
+		description = "Scanconfig"
+		date = "2018-28-11"
+		filetype = "PHP files"
 
         strings:
 		$a = "Lumajangcrew And All Forum Hacker Indonesia" fullword ascii
