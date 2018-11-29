@@ -7,8 +7,9 @@ rule EITest
 		filetype = "PHP files"
 
         strings:
-                $var = "= explode(chr(("
+		$a = "?php"
+                $b = "= explode(chr(("
 
         condition:
-                any of them
+                all of them
 }
