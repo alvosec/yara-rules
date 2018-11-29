@@ -8,7 +8,7 @@ rule EITest
 
         strings:
 		$a = "?php"
-                $b = "= explode(chr(("
+		$b = "= explode(chr(("
 
         condition:
                 all of them
