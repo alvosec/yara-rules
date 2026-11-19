@@ -2,9 +2,9 @@ rule phishing_pdf : PDF
 {
         meta:
 		author = "Alvosec Security Team <info@alvosec.com>"
-		description = "Detect VBA macro code in Office document"
+		description = "Detect PDF files containing external URI links (experimental, phishing hunting)"
 		date = "2018-19-11"
-		filetype = "Office documents"
+		filetype = "PDF"
 
         strings:
                 $header = "%PDF-1"
