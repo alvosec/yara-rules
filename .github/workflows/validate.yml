@@ -1,0 +1,31 @@
+name: Validate YARA rules
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install YARA
+        run: sudo apt-get update && sudo apt-get install -y yara
+      - name: Compile every rule file together (catches syntax errors and duplicate rule names)
+        run: |
+          files=$(find . -name '*.yar' -o -name '*.yara' | grep -v '^./.git/')
+          echo "$files"
+          yarac $files /tmp/all.yarc
+      - name: Check required meta fields in new/changed rules
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --depth=1 origin "${{ github.base_ref }}"
+          changed=$(git diff --name-only --diff-filter=AM FETCH_HEAD -- '*.yar' '*.yara' || true)
+          fail=0
+          for f in $changed; do
+            for field in author description date; do
+              grep -qiE "^\s*$field\s*=" "$f" || { echo "::error file=$f::missing meta field '$field'"; fail=1; }
+            done
+          done
+          exit $fail
